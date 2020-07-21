@@ -18,7 +18,7 @@ const Order = (props) => {
 
 	const ingredientOutput = ingredients.map((ingredient) => {
 		return (
-			<span key={ingredient.name}>
+			<span key={ingredient.name} className={styles.Span}>
 				{ingredient.name} ({ingredient.amount})
 			</span>
 		);
