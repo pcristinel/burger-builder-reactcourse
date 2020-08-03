@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from './ContactData/ContactData';
 
-export default class Checkout extends Component {
+class Checkout extends Component {
 	state = {
 		ingredients: null,
 		totalPrice: 0
@@ -53,3 +53,5 @@ export default class Checkout extends Component {
 		);
 	}
 }
+
+export default Checkout;
