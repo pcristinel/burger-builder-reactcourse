@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import classes from './ContactData.module.css';
 
@@ -97,14 +98,19 @@ class ContactData extends Component {
 		event.preventDefault();
 		this.setState({ loading: true });
 		const formData = {};
+
 		for (let formElementIdentifier in this.state.orderForm) {
 			formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
 		}
+
 		const order = {
 			ingredients: this.props.ingredients,
 			price: this.props.price,
 			orderData: formData
 		};
+
+		console.log(order);
+
 		axios
 			.post('/orders.json', order)
 			.then((response) => {
@@ -176,7 +182,7 @@ class ContactData extends Component {
 						changed={(event) => this.inputChangedHandler(event, formElement.id)}
 					/>
 				))}
-				<Button btnType='Success' disabled={!this.state.formIsValid}>
+				<Button buttonType='Success' disabled={!this.state.formIsValid}>
 					ORDER
 				</Button>
 			</form>
@@ -195,4 +201,11 @@ class ContactData extends Component {
 	}
 }
 
-export default ContactData;
+const mapStateToProps = (state) => {
+	return {
+		ingredients: state.ingredients,
+		price: state.totalPrice
+	};
+};
+
+export default connect(mapStateToProps)(ContactData);
